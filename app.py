@@ -39,8 +39,6 @@ def main():
    
       
 
-
-
 @app.route('/agendamentos' , methods=["GET", "POST"])
 def agendamentos():
   cliente = request.form.get('nome') 
@@ -97,12 +95,20 @@ def agendamentos():
   except HttpError as error:
     print(f"An error occurred: {error}")
 
-
   return render_template("agendamentos.html", clientelist=clientelist)
+   
+   
+   
+   
        
 @app.route('/clientes')
 def lista_clientes():
        return render_template('clientes.html',clientes=clientes.query.all())
+
+
+
+
+
 
 @app.route('/cadastra_cliente', methods=["GET", "POST"])
 def cria_cliente():
