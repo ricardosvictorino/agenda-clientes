@@ -1,0 +1,92 @@
+{% extends 'base.html'%}
+{% block conteudo %}
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+    id="title">
+    <h1 class="h2">Agendamentos</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group me-2">
+        <button type="button" class="btn-success btn-bd-primary  btn-outline-secondary"><a
+            href="{{url_for('cria_cliente')}}" class="nav-link link-body-emphasis">Cadastrar</a> </button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+        <i class="bi bi-calendar3"></i>
+        This week
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row" style="margin-left: 0.5rem;">
+
+  <div class="col">
+    <div class="card">
+
+      <form action="{{agendamentos}}" method="POST" class="form-control">
+        <div class="row">
+          <div class="col">
+            <h6>Cliente</h6>
+            <select name="nome" id="nome" class="form-control">
+              {% for cliente in clientelist%}
+              <option value="{{cliente.nome}}">{{cliente.nome}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col">
+            <h6>Data do Agendamento</h6>
+            <input class="form-control" name="data" type="datetime-local" placeholder="Selecione o dia">
+          </div>
+        </div>
+
+        <br>
+        <div class="col-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" name="whatsapp">
+            <label class="form-check-label" for="switchCheckDefault">Notificar Cliente via WHATSAPP</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1" >
+            <label class="form-check-label" for="radioDefault1">
+              Atendimento 60 minutos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2"  checked>
+            <label class="form-check-label" for="radioDefault2">
+              Atendimento 90 minutos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault3" checked>
+            <label class="form-check-label" for="radioDefault3">
+              Atendimento 120 minutos
+            </label>
+          </div>
+        </div>
+
+        <br>
+        <button class="btn btn-success">Adicionar</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <div class="col">
+    <iframe src="https://calendar.google.com/calendar/embed?src=calendariotestecalendario%40gmail.com&ctz=America%2FSao_Paulo" style="border: 0"  width="800" height="600" frameborder="0" scrolling="no"></iframe>  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    $('#nome').editableSelect();
+  });
+</script>
+
+{% endblock conteudo %}
