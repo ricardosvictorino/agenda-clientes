@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import select
 import os.path
 from os import path
 from google.auth.transport.requests import Request
@@ -25,6 +26,7 @@ class clientes(db.Model):
 
      
        def __init__(self, nome, telefone,email):
+
               self.nome = nome
               self.telefone = telefone
               self.email = email
@@ -36,8 +38,7 @@ class clientes(db.Model):
 @app.route('/')
 def main(): 
   return render_template("index.html")
-   
-      
+     
 
 @app.route('/agendamentos' , methods=["GET", "POST"])
 def agendamentos():
@@ -97,17 +98,17 @@ def agendamentos():
 
   return render_template("agendamentos.html", clientelist=clientelist)
    
-   
-   
-   
-       
-@app.route('/clientes')
+     
+     
+@app.route('/clientes', methods=['GET', 'POST'])
 def lista_clientes():
+  
        return render_template('clientes.html',clientes=clientes.query.all())
 
-
-
-
+@app.route('/cliente/<int:cliente_id>', methods=['GET', 'POST'])
+def lista_cliente(cliente_id):
+  cliente = clientes.query.get(cliente_id)
+  return render_template('formcliente.html',cliente=cliente)
 
 
 @app.route('/cadastra_cliente', methods=["GET", "POST"])
@@ -115,8 +116,7 @@ def cria_cliente():
         
         nome = request.form.get('nome')
         telefone = request.form.get('telefone')
-        email = request.form.get('email')
-        
+        email = request.form.get('email')     
         if request.method == 'POST':
                cliente = clientes(nome,telefone,email)
                db.session.add(cliente)
@@ -125,6 +125,29 @@ def cria_cliente():
                return redirect(url_for('lista_clientes'))
 
         return render_template("novo_cliente.html")
+
+
+@app.route('/delete/<int:cliente_id>',methods=['POST'])
+def deleta_cliente(cliente_id): 
+    cliente = clientes.query.get(cliente_id)
+    if request.method == 'POST':
+      db.session.delete(cliente)
+      db.session.commit()
+    return redirect('/clientes')
+  
+
+@app.route('/update/<int:cliente_id>',methods=['POST','GET'])
+def update_cliente(cliente_id):
+    cliente = clientes.query.get(cliente_id)
+    if cliente:        
+        cliente.nome = request.form.get('nome')
+        cliente.telefone = request.form.get('telefone')
+        cliente.email = request.form.get('email')
+        db.session.commit()        
+    return redirect(url_for('lista_clientes'))
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
