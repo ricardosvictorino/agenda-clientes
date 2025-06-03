@@ -1,42 +1,32 @@
 {% extends 'base.html'%}
 {% block conteudo %}
 
-
 <div class="container-fluid">
-
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
         id="title">
         <h4>Atualizar Cadastro</h4>
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
     </div>
-
-
-
-  
- 
-    
-    <form action="/update/{{cliente.id}}"  method="POST" class="form-control">
+    <form action="/update/{{cliente.id}}" method="POST" class="form-control">
         <div class="row">
             <div class="col">
                 <label>Nome</label>
                 <input class="form-control" type="text" name="nome" value="{{cliente.nome}}" placeholder="Nome">
             </div>
-        
-          
         </div>
         <br>
         <h5>Contato</h5>
         <div class="row">
             <div class="col">
                 <label>Email @</label>
-                <input class="form-control" type="email" name="email" value="{{cliente.email}}" placeholder="Email" >
+                <input class="form-control" type="email" name="email" value="{{cliente.email}}" placeholder="Email">
             </div>
             <div class="col">
                 <label>Telefone</label>
-                <input class="form-control" type="tel" name="telefone" value="{{cliente.telefone}}" placeholder="Telefone" >
+                <input class="form-control" type="tel" name="telefone" value="{{cliente.telefone}}"
+                    placeholder="Telefone">
             </div>
-            
         </div>
         <br>
         <h5>Endereço</h5>
@@ -48,7 +38,7 @@
             <div class="col">
                 <label>Bairro</label>
                 <input class="form-control" type="text" name="bairro" placeholder="Bairro" disabled>
-            </div>           
+            </div>
         </div>
         <br>
         <div class="row">
@@ -62,6 +52,10 @@
             </div>
         </div>
         <br>
-        <button class="btn btn-success" type="submit">Adicionar</button>
+        <button class="btn btn-success" type="submit">Salvar</button>
+        
     </form>
-    {% endblock conteudo %}
+    <style ></style>
+   <script src="../static/js/novo_cliente.js"></script>
+</div>
+{% endblock conteudo %}

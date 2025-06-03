@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+
+{% block conteudo %}
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+    id="title">
+    <h5 >Agendamentos</h5>
+  </div>
+</div>
+
+
+
+<div class="row" style="padding: 1rem;">
+  <div class="col">
+    <div class="card">
+      <form action="{{cria_agendamento}}" method="POST" class="form-control">
+        <div class="row">
+          <div class="col">
+            <h6>Cliente</h6>
+            <select name="nome" id="nome" class="form-control">
+              {% for cliente in clientelist%}
+              <option value="{{cliente.nome}}">{{cliente.nome}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col">
+            <h6>Data do Agendamento</h6>
+            <input class="form-control" name="data" type="datetime-local" placeholder="Selecione o dia">
+          </div>
+        </div>
+
+        <br>
+        <div class="col-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" name="whatsapp">
+            <label class="form-check-label" for="switchCheckDefault">Notificar Cliente via WHATSAPP</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipo_atendimento" value="60" id="radioDefault1" >
+            <label class="form-check-label" for="radioDefault1">
+              Atendimento 60 minutos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipo_atendimento" value="90" id="radioDefault2"  checked>
+            <label class="form-check-label" for="radioDefault2">
+              Atendimento 90 minutos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipo_atendimento" value="120" id="radioDefault3" checked>
+            <label class="form-check-label" for="radioDefault3">
+              Atendimento 120 minutos
+            </label>
+          </div>
+        </div>
+
+        <br>
+        <button class="btn btn-success">Agendar</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <div class="row-12" style="padding-top: 1.5rem;">
+    <iframe src="https://calendar.google.com/calendar/embed?src=calendariotestecalendario%40gmail.com&ctz=America%2FSao_Paulo" style="border:10"  width="100%" height="400px" frameborder="0" scrolling="no"></iframe>  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    $('#nome').editableSelect();
+  });
+</script>
+
+{% endblock conteudo %}

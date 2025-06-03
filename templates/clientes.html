@@ -1,60 +1,52 @@
 {% extends 'base.html'%}
 {% block conteudo %}
-<main class="col-sm-12 bg-body-tertiary" id="main">
-    <div class="container-fluid">
-
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-            id="title">
-            <h5>Clientes</h5>
-
+<h2>Atendimentos</h2>
+<div class="container" style="background-color: white;position: fixed;z-index: 1000;">
+    <div class="row " style="margin-left: -0.5rem;">
+        <div class="col-10">
+            <div class="card" style="    margin-top: 3rem !important;  border:none;">
+                <!--
+                <select name="nome" id="nome" class="form-control">
+                    {% for cliente in clientelist%}
+                    <option id="buscaCliente" value="{{cliente.id}}">{{cliente.nome}}</option>
+                    {% endfor %}
+                </select>
+                -->
+                <input type="text" id="buscaNome" class="form-control" placeholder="Digite o nome do cliente..." />
+            </div>
         </div>
-    </div>
-    <div class="row my-4">
-        <div class="card">
-            <div class="card-body">
-                <div cslass="col-sm-12">
-                    <div class="table-responsive small">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#ID</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">E-mail@</th>
-                                    <th scope="col" style="padding-left: 3rem;">Ação</th>
+        <div class="col-2">
+            <div class="" style="   margin-top: 3rem !important;  ">
+                <div class="btn-group me-2">
+                    <a href="{{url_for('cria_cliente')}}" class="nav-link link-body-emphasis">
+                        <img src="../static/img/add_cliente.png" widh="38rem" height="38rem" />
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cliente in clientes %}
-                                <tr>
-                                    <td>{{cliente.id}}</td>
-                                    <td>{{cliente.nome}}</td>
-                                    <td>{{cliente.telefone}}</td>
-                                    <td>{{cliente.email}}</td>
-                                    <td>
-                                        <form action="/cliente/{{cliente.id}}" method="GET" style="display: inline;">
-                                            <button type="submit" class="btn btn-outline-primary">Editar</button>
-                                        </form>
-                                        <form action="/delete/{{cliente.id}}" method="POST" style="display: inline;">
-                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
-                                        </form>
-                                        
-                                    </td>
-                                </tr>
-                                {% endfor %}
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn-success btn-bd-primary  "><a href="{{url_for('cria_cliente')}}"
-                                class="nav-link link-body-emphasis">Cadastrar</a> </button>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
+
+
     </div>
-    {% endblock conteudo %}
+</div>
+
+<div id="listaClientes" class="col-sm-12" style="z-index: 999; margin-top: 7rem;">
+    {% for cliente in clientes %}
+    <div class="card m-3" style="border-radius: 5px;">
+        <form action="/cliente/{{cliente.id}}" method="GET" style="display: inline;">
+            <button type="submit" class="btn btn-outline-primary" style="width: 100%;">
+                {{cliente.nome}}
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+
+</div>
+
+<script src="../static/js/clientes.js"></script>
+
+
+{% endblock conteudo %}

@@ -3,7 +3,6 @@
 
 
 <div class="container-fluid">
-
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
         id="title">
         <h4>Cadastro de Cliente</h4>
@@ -11,17 +10,13 @@
         </div>
     </div>
 
-
-
-
     <form action="{{cria_cliente}}" method="POST" class="form-control">
         <div class="row">
             <div class="col">
                 <label>Nome</label>
                 <input class="form-control" type="text" name="nome" placeholder="Nome do Cliente" required>
             </div>
-        
-          
+              
         </div>
         <br>
         <h5>Contato</h5>
@@ -31,8 +26,8 @@
                 <input class="form-control" type="email" name="email" placeholder="Email" required>
             </div>
             <div class="col">
-                <label>Telefone</label>
-                <input class="form-control" type="tel" name="telefone" placeholder="Telefone" required>
+                <label>Telefone</label>               
+               <input class="form-control" type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
             </div>
             
         </div>
@@ -62,5 +57,5 @@
         <br>
         <button class="btn btn-success">Adicionar</button>
     </form>
-
+<script src="../static/js/novo_cliente.js"></script>
     {% endblock conteudo %}

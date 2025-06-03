@@ -1,82 +1,41 @@
 {% extends 'base.html'%}
 {% block conteudo %}
-
-<div class="container-fluid">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-    id="title">
-    <h5 >Agendamentos</h5>
-  </div>
-</div>
-
-
-
-<div class="row" style="margin-left: 0.5rem;">
-
-  <div class="col">
-    <div class="card">
-
-      <form action="{{agendamentos}}" method="POST" class="form-control">
-        <div class="row">
-          <div class="col">
-            <h6>Cliente</h6>
-            <select name="nome" id="nome" class="form-control">
-              {% for cliente in clientelist%}
-              <option value="{{cliente.nome}}">{{cliente.nome}}</option>
-              {% endfor %}
-            </select>
-          </div>
-
-          <div class="col">
-            <h6>Data do Agendamento</h6>
-            <input class="form-control" name="data" type="datetime-local" placeholder="Selecione o dia">
-          </div>
+<h2>Atendimentos</h2>
+<div class="container" style="background-color: white;position: fixed;z-index: 1000;">
+    <div class="row" style="margin-left: -0.5rem;">
+        <div class="col-10">
+            <div class="card" style="margin-top: 3rem !important; border:none;">
+                <input type="text" id="buscaNome" class="form-control" placeholder="Digite o nome do cliente..." />
+            </div>
         </div>
-
-        <br>
-        <div class="col-12">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" name="whatsapp">
-            <label class="form-check-label" for="switchCheckDefault">Notificar Cliente via WHATSAPP</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1" >
-            <label class="form-check-label" for="radioDefault1">
-              Atendimento 60 minutos
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2"  checked>
-            <label class="form-check-label" for="radioDefault2">
-              Atendimento 90 minutos
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault3" checked>
-            <label class="form-check-label" for="radioDefault3">
-              Atendimento 120 minutos
-            </label>
-          </div>
+        <div class="col-2">
+            <div style="margin-top: 3rem !important;">
+                <div class="btn-group me-2">
+                    <a href="{{ url_for('cria_agendamento') }}" class="nav-link link-body-emphasis">
+                        <img src="../static/img/calendario.png" width="38rem" height="38rem" />
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <br>
-        <button class="btn btn-success">Adicionar</button>
-      </form>
     </div>
-  </div>
-
-
-
-
-  <div class="col">
-    <iframe src="https://calendar.google.com/calendar/embed?src=calendariotestecalendario%40gmail.com&ctz=America%2FSao_Paulo" style="border: 0"  width="800" height="600" frameborder="0" scrolling="no"></iframe>  </div>
-
 </div>
 
-<script>
-  $(document).ready(function () {
+<div class="col-sm-12" style="z-index: 999; margin-top: 7rem;" id="listaAgendamentos">
+    {% for agendamento in agendamentos %}
+    <div class="card m-3 p-3" style="border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background-color: rgb(250, 250, 250);">
+        <form action="/agendamento/{{ agendamento.id }}" method="GET" style="display: inline; width: 100%;">
+            <button type="submit" class="btn w-100 text-start agendamento-btn" 
+                style="color: #666666; font-weight: normal;">
+                <div><strong style="color: #222222;">{{ agendamento.cliente.nome }}</strong> </div>
+                <div>ID Agendamento: {{ agendamento.id }}</div>
+                <div>Data Início: {{ agendamento.data_inicio.strftime('%d/%m/%Y %H:%M') }}</div>
+                <div>Data Prevista de Término: {{ agendamento.data_termino.strftime('%d/%m/%Y %H:%M') }}</div>
+                <div>Tipo de Atendimento: {{ agendamento.tipo_atendimento }} minutos</div>
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
 
-    $('#nome').editableSelect();
-  });
-</script>
-
+<script src="../static/js/agendamentos.js"></script>
 {% endblock conteudo %}

@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block conteudo %}
+<div class="container card-height">
+    <div class="row  align-items-center card-height" style=" padding:0.7rem;">
+        <div class="col card" style=" border:none;">
+            <div class=" card-body " style="background-color: rgb(240, 240, 240); border-radius: 9px;">
+                <a href="{{url_for('lista_agendamentos')}}" class="nav-link link-body-emphasis">
+                    <img src="../static/img/calendario.png" widh="28px" height="28px" />
+                    <br>
+                    <p class="bi h6" style="padding-top: 0.5rem;"> Agendamentos</p><br>
+                </a>
+            </div>
+            <br>
+            <div class="card-body" style="background-color: rgb(240, 240, 240);border-radius: 9px;">
+                <a href="{{url_for('lista_clientes')}}" class="nav-link link-body-emphasis">
+                    <img src="../static/img/cliente.png" widh="28px" height="28px" />
+
+                    <p class=" h6" style="padding-top: 0.5rem;"> Clientes</p>
+                </a>
+            </div>
+        </div>
+        <div class="col card" style="border:none; ">
+                <div class="card-body" style="background-color: rgb(240, 240, 240);border-radius: 9px; ">
+                <a href="{{url_for('calendario')}}" class="nav-link link-body-emphasis">
+                    <img src="../static/img/calendario_hoje.png" widh="28px" height="28px" />
+                    <br>
+                    <p class="bi h6" style="padding-top: 0.5rem;"> Calendário</p><br>
+                </a>
+            </div>
+            <br>
+            <div class="card-body" style="background-color: rgb(240, 240, 240); border-radius: 9px; ">
+                <a href="{{url_for('config')}}" class="nav-link link-body-emphasis">
+                    <img src="../static/img/config.png" widh="26px" height="26px" />
+                    <br>
+                    <p class="bi h6" style="padding-top: 0.5rem;"> Configurações</p><br>
+                </a>
+            </div>
+
+        
+        </div>
+        <div class="d-grid gap-4 align-items-start">
+            <a href="{{url_for('cria_agendamento')}}" >
+                <button class="btn btn-success "  style="height: 3rem; width: 100%;" type="button"><img
+                        src="../static/img/calendario.png" widh="28px" height="28px"
+                        style="padding-right: 1rem;" />Agendar cliente</button>
+            </a>
+        </div>
+        
+    </div>
+    
+</div>
+{% endblock conteudo %}

@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block conteudo %}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        id="title">
+        <h4>Configurações</h4>
+        <div class="btn-toolbar mb-2 mb-md-0">
+        </div>
+    </div>
+    <form action="/" method="POST" class="form-control">
+        <div class="row">
+            <h3>Configurações bot Whatsapp</h3>
+            <br>
+            <div class="col">
+                <label >Texto padrão para mensagem automática.</label>
+                <textarea class="form-control"   type="text" name="nome" value="" placeholder="Mensagem"></textarea>
+                
+            </div>
+        </div>
+        <br>
+      
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipo_atendimento" value="90" id="radioDefault2"  checked>
+            <label class="form-check-label" for="radioDefault2">
+              Notificação Via Whatsapp 24h antes 
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipo_atendimento" value="120" id="radioDefault3" checked>
+            <label class="form-check-label" for="radioDefault3">
+              Notificação Via whatsapp 48h antes 
+            </label>
+          </div>
+           <br>
+        <button class="btn btn-success" type="submit">Salvar</button>
+    </form>
+
+
+</div>
+{% endblock conteudo %}
